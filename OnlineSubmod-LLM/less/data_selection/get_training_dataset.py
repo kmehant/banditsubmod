@@ -71,6 +71,7 @@ def encode_data(raw_datasets, tokenizer, max_seq_length, processing_num_workers=
 
 def get_encode_function(raw_datasets, tokenizer, max_seq_length, func="encode_with_messages_format"):
     """ get encode function based on the dataset. """
+    
     if "prompt" in raw_datasets.column_names and "completion" in raw_datasets.column_names:
         encode_function = partial(
             encode_with_prompt_completion_format,
@@ -121,6 +122,18 @@ def encode_with_prompt_completion_format(example, tokenizer, max_seq_length):
         'labels': labels.flatten(),
         'attention_mask': attention_mask.flatten(),
     }
+
+def encode_with_chat_tools_format(example, tokenizer, max_seq_length):
+    import json
+    conv = example["conversations"]
+    tools = example["tools"] if "tools" in example else None
+    documents = example["documents"] if "documents" in example else None
+
+    if tools and isinstance(tools, str):
+        tools = json.loads(tools)
+    d = tokenizer.apply_chat_template(conv, tokenize=True, tools=tools, documents=documents, return_dict=True, return_tensors="pt")
+    d["labels"] = d["input_ids"].clone()
+    return d
 
 
 def encode_with_messages_format(example, tokenizer, max_seq_length):

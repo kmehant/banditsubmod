@@ -30,10 +30,7 @@ if [[ ! -d $output_dir ]]; then
 fi
 
 train_files=(
-    "$data_dir/train/processed/flan_v2/flan_v2_data.jsonl"
-    "$data_dir/train/processed/cot/cot_data.jsonl"
-    "$data_dir/train/processed/dolly/dolly_data.jsonl"
-    "$data_dir/train/processed/oasst1/oasst1_data.jsonl"
+    "$data_dir/train.jsonl"
     )
 
 # use fsdp for large models
@@ -53,8 +50,6 @@ training_args="$base_training_args \
 --subject $subject \
 --n_val $nval \
 --analysis_dataset $task \
---lora_target_modules $combined_modules \
---lora_alpha $lora_alpha \
 --learning_rate $lr \
 --gradient_accumulation_steps $gradient_accumulation_steps \
 --seed $seed \
