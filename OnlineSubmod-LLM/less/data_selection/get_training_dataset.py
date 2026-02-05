@@ -138,7 +138,11 @@ def encode_with_chat_tools_format(example, tokenizer, max_seq_length):
     if tools and isinstance(tools, str):
         tools = json.loads(tools)
     d = tokenizer.apply_chat_template(conv, tokenize=True, tools=tools, documents=documents, return_dict=True)
+    if not isinstance(d["input_ids"], torch.Tensor):
+        d["input_ids"] = torch.tensor(d["input_ids"])
     d["labels"] = d["input_ids"].clone()
+    if tokenizer.pad_token_id is not None:
+        d["labels"][d["labels"] == tokenizer.pad_token_id] = -100
     return d
 
 
