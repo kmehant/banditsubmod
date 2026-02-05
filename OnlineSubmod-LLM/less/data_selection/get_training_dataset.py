@@ -71,7 +71,12 @@ def encode_data(raw_datasets, tokenizer, max_seq_length, processing_num_workers=
 
 def get_encode_function(raw_datasets, tokenizer, max_seq_length, func="encode_with_messages_format"):
     """ get encode function based on the dataset. """
-    return encode_with_chat_tools_format
+    encode_function = partial(
+        encode_with_chat_tools_format,
+        tokenizer=tokenizer,
+        max_seq_length=max_seq_length,
+    )
+    return encode_function
 
     if "prompt" in raw_datasets.column_names and "completion" in raw_datasets.column_names:
         encode_function = partial(
