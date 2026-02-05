@@ -188,22 +188,26 @@ def main():
     ##### Choice of validation: ["bbh", "tydiqa", "mmlu"]
     from less.data_selection.get_validation_dataset import get_dataset
     data_args.data_dir = './data'
+    ds = train_dataset.train_test_split(test_size=0.1)
+    train_dataset = ds["train"]
+    analysis_dataset = ds["test"]
+    test_dataset = ds["test"]
+    
+    # analysis_dataset = get_dataset(training_args.analysis_dataset,
+    #                                 data_dir=data_args.data_dir,
+    #                                 tokenizer=tokenizer,
+    #                                 max_length=data_args.max_seq_length, 
+    #                                 validation=True, 
+    #                                 k = training_args.n_val, 
+    #                                 subject = training_args.subject)
 
-    analysis_dataset = get_dataset(training_args.analysis_dataset,
-                                    data_dir=data_args.data_dir,
-                                    tokenizer=tokenizer,
-                                    max_length=data_args.max_seq_length, 
-                                    validation=True, 
-                                    k = training_args.n_val, 
-                                    subject = training_args.subject)
-
-    test_dataset = get_dataset(training_args.analysis_dataset,
-                                data_dir=data_args.data_dir,
-                                tokenizer=tokenizer,
-                                max_length=data_args.max_seq_length, 
-                                validation=False, 
-                                k = training_args.n_test, 
-                                subject = training_args.subject)
+    # test_dataset = get_dataset(training_args.analysis_dataset,
+    #                             data_dir=data_args.data_dir,
+    #                             tokenizer=tokenizer,
+    #                             max_length=data_args.max_seq_length, 
+    #                             validation=False, 
+                                # k = training_args.n_test, 
+                                # subject = training_args.subject)
     ##### ***************************************** #####
 
     training_args.result_dir = '/dummy/dummy_students/GREATS/results/'
