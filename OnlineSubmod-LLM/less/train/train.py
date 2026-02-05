@@ -174,7 +174,7 @@ def main():
             param.requires_grad = True
         ##### ***************************************** #####
 
-    model.print_trainable_parameters()
+    # model.print_trainable_parameters()
     ##### ***************************************** #####
 
 
