@@ -170,7 +170,7 @@ def main():
 
         ##### ***************************************** #####
         ##### Make the last layer trainable #####
-        for param in model.base_model.model.lm_head.parameters():
+        for param in model.lm_head.parameters():
             param.requires_grad = True
         ##### ***************************************** #####
 
