@@ -26,9 +26,9 @@ from less.train.training_arguments import TrainingArguments
 
 logger = logging.getLogger(__name__)
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
-from ..layers.linear import GCLinear
-from ..layers.lora_layers import GCLoRALinear
-from ..train.gctrainer import GCTrainer
+from less.layers.linear import GCLinear
+from less.layers.lora_layers import GCLoRALinear
+from less.train.gctrainer import GCTrainer
 
 
 

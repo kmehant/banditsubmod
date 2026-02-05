@@ -16,7 +16,7 @@ from transformers.trainer_utils import speed_metrics
 from transformers.trainer_callback import TrainerState, TrainerCallback
 from transformers.trainer_pt_utils import get_model_param_count
 from torch.utils.data import DataLoader, Dataset, RandomSampler, SequentialSampler
-# from ..train.helper import *
+# from less.train.helper import *
 import numpy as np
 
 # from transformers.integrations import is_fairscale_available
@@ -26,7 +26,7 @@ import warnings
 import time
 from contextlib import nullcontext
 
-from ..train.utils_ghost_dot_prod import compute_GradProd_GC_per_iter, greedy_selection, find_GClayers, find_topk_GClayers, find_bottomk_GClayers, \
+from less.train.utils_ghost_dot_prod import compute_GradProd_GC_per_iter, greedy_selection, find_GClayers, find_topk_GClayers, find_bottomk_GClayers, \
     submod_selection, random_selection, compute_GradProd_onlinesubmod
 
 # Configure logging at the root level of logging
