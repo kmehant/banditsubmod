@@ -138,7 +138,7 @@ def encode_with_chat_tools_format(example, tokenizer, max_seq_length):
     if tools and isinstance(tools, str):
         tools = json.loads(tools)
     d = tokenizer.apply_chat_template(conv, tokenize=True, tools=tools, documents=documents, return_dict=True)
-    # d["labels"] = d["input_ids"].clone()
+    d["labels"] = d["input_ids"].clone()
     return d
 
 
