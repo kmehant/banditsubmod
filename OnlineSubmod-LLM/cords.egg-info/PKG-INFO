@@ -1,0 +1,18 @@
+Metadata-Version: 2.4
+Name: cords
+Version: 0.0.4
+Summary: cords is a package for data subset selection for efficient and robust machine learning.
+Home-page: XXXX
+Author: Krishnateja Killamsetty, Dheeraj Bhat, Rishabh Iyer
+Author-email: krishnatejakillamsetty@gmail.com
+License: LICENSE.txt
+Description-Content-Type: text/markdown
+Dynamic: author
+Dynamic: author-email
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license
+Dynamic: summary
+
+CORDS is COReset and Data Selection library for making machine learning time, energy, cost, and compute efficient. CORDS is built on top of PyTorch. Today, deep learning systems are extremely compute-intensive, with significant turnaround times, energy inefficiencies, higher costs, and resource requirements [7, 8]. CORDS is an effort to make deep learning more energy, cost, resource, and time-efficient while not sacrificing accuracy.
