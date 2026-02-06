@@ -125,7 +125,7 @@ def compute_GradProd_GC_per_iter(model, device, batch_train, validation_loader, 
         # Pre-allocate lists with known size
         train_results = [None] * len(decompose_results)
         val_results = [None] * len(decompose_results)
-
+        print(f"decompose_results {decompose_results}")
         # Single loop with direct indexing
         for i, (dLdZ, a) in enumerate(decompose_results):
             # Use torch.split instead of slicing for better memory efficiency
@@ -280,7 +280,7 @@ def compute_GradProd_onlinesubmod(model, device, batch_train, validation_loader,
         # Pre-allocate lists with known size
         train_results = [None] * len(decompose_results)
         val_results = [None] * len(decompose_results)
-
+        print(f"decompose_results {decompose_results}")
         # Single loop with direct indexing
         for i, (dLdZ, a) in enumerate(decompose_results):
             # Use torch.split instead of slicing for better memory efficiency

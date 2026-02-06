@@ -210,48 +210,49 @@ def main():
                                 # subject = training_args.subject)
     ##### ***************************************** #####
 
-    training_args.result_dir = '/dummy/dummy_students/GREATS/results/'
-    training_args.result_dir += f"{training_args.save_prefix}-"
+    training_args.result_dir = training_args.output_dir + "results.json"
+    # training_args.result_dir += f"{training_args.save_prefix}-"
     
     # Commenting this out because its pissing me off
     # if training_args.method == 'GREATS':
         # training_args.per_device_train_batch_size = int( training_args.per_device_train_batch_size * training_args.fracinv )
 
-    if "Mistral-7B" in model_args.model_name_or_path:
-        training_args.result_dir = training_args.result_dir + 'Mistral-7B'
-    elif "Llama-2" in model_args.model_name_or_path:
-        training_args.result_dir = training_args.result_dir + 'Llama-2'
+    # if "Mistral-7B" in model_args.model_name_or_path:
+    #     training_args.result_dir = training_args.result_dir + 'Mistral-7B'
+    # elif "Llama-2" in model_args.model_name_or_path:
+    #     training_args.result_dir = training_args.result_dir + 'Llama-2'
 
-    from datetime import datetime
+    # from datetime import datetime
 
-    timestamp = datetime.now().strftime('%b%d-%H%M')  # e.g., Apr30-1530
+    # timestamp = datetime.now().strftime('%b%d-%H%M')  # e.g., Apr30-1530
     # training_args.result_dir = training_args.result_dir + '-{}-BS{}-TrainPct{}-{}-NVAL{}-NTEST{}-{}'.format(
-    training_args.result_dir = training_args.result_dir + '-{}-{}'.format(
-        # training_args.method, 
-        # training_args.per_device_train_batch_size * training_args.gradient_accumulation_steps, 
-        # data_args.percentage, 
-        training_args.subject, 
-        # training_args.n_val, 
-        # training_args.n_test,
-        timestamp)
+    # training_args.result_dir = training_args.result_dir + '-{}-{}'.format(
+    #     # training_args.method, 
+    #     # training_args.per_device_train_batch_size * training_args.gradient_accumulation_steps, 
+    #     # data_args.percentage, 
+    #     training_args.subject, 
+    #     # training_args.n_val, 
+    #     # training_args.n_test,
+    #     timestamp)
     
     # Add LoRA parameters
-    training_args.result_dir = training_args.result_dir + '-LoRA_R{}_Alpha{}_Dropout{}'.format(
-        model_args.lora_r, model_args.lora_alpha, model_args.lora_dropout,
-    )
+    # training_args.result_dir = training_args.result_dir + '-LoRA_R{}_Alpha{}_Dropout{}'.format(
+    #     model_args.lora_r, model_args.lora_alpha, model_args.lora_dropout,
+    # )
     
-    training_args.result_dir = training_args.result_dir + '-LR{}'.format(training_args.learning_rate)
-    training_args.result_dir = training_args.result_dir + '-Seed{}'.format(training_args.seed)
+    # training_args.result_dir = training_args.result_dir + '-LR{}'.format(training_args.learning_rate)
+    # training_args.result_dir = training_args.result_dir + '-Seed{}'.format(training_args.seed)
     
-    if training_args.method == 'GREATS':
-        training_args.result_dir = training_args.result_dir + '-FRACINV{}'.format(training_args.fracinv)
+    # if training_args.method == 'GREATS':
+    #     training_args.result_dir = training_args.result_dir + '-FRACINV{}'.format(training_args.fracinv)
 
-    training_args.result_dir = training_args.result_dir + '_results.json'
+    # training_args.result_dir = training_args.result_dir + 'results.json'
 
     if os.path.exists( training_args.result_dir ):
         os.remove( training_args.result_dir )
         print(f"The file {training_args.result_dir} has been removed.")
-
+    model.gradient_checkpointing_enable()
+    model.config.use_cache = False
     trainer = GCTrainer(
         model=model,
         args=training_args,
